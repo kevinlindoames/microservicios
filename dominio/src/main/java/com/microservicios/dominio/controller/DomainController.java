@@ -16,9 +16,15 @@ public class DomainController {
     @PostMapping("/save")
     public ResponseEntity<String> saveData(@RequestBody DomainEntity data) {
         try {
-            entityRepository.save(data);
-            return ResponseEntity.ok("Datos guardados correctamente.");
+            DomainEntity savedEntity = entityRepository.save(data);
+            if (savedEntity != null && savedEntity.getId() != null) {
+                return ResponseEntity.ok("Datos guardados correctamente.");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar los datos.");
+            }
         } catch (Exception e) {
+            // Loguea el error para depuración
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar los datos.");
         }
     }
