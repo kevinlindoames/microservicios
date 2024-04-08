@@ -102,7 +102,7 @@ Pruebas:
 
 	Para probar los microservicios, puedes usar herramientas como Postman. Aquí hay algunas solicitudes que puedes realizar:
 
-	Guardar datos: Realiza una solicitud POST al endpoint /save del microservicio orquestador con los datos que deseas guardar.
+	Guardar datos: Realiza una solicitud POST al endpoint (http://localhost:8080/save) del microservicio orquestador con los datos que deseas guardar.
 
 Notas Adicionales:
 
