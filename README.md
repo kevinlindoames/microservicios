@@ -1,6 +1,8 @@
-Proyecto Spring Boot con Microservicios
-Este proyecto consiste en dos microservicios desarrollados con Spring Boot: orquestador y dominio. El microservicio orquestador se encarga de recibir las solicitudes, validarlas y comunicarse con el microservicio dominio para guardar los datos en una base de datos. Ambos microservicios están conectados entre sí para lograr la funcionalidad deseada.
-Configuración de la Base de Datos PostgreSQL
+Proyecto Spring Boot con Microservicios:
+	Este proyecto consiste en dos microservicios desarrollados con Spring Boot: orquestador y dominio. El microservicio orquestador se encarga de recibir las 		solicitudes, validarlas y comunicarse con el microservicio dominio para guardar los datos en una base de datos. Ambos microservicios están conectados entre sí para 	lograr la funcionalidad deseada.
+ 
+Configuración de la Base de Datos PostgreSQL:
+
 El script SQL a continuación crea la base de datos PostgreSQL y la tabla necesaria para este proyecto:
 -- DROP SCHEMA public;
 
@@ -64,42 +66,44 @@ GRANT ALL ON SCHEMA public TO public;
 
 Este script crea una tabla llamada datos en el esquema public de la base de datos. Asegúrate de ejecutar este script en tu entorno de base de datos PostgreSQL antes de ejecutar los microservicios.
 
-Detalles del Proyecto
+Detalles del Proyecto :
 
-Microservicio Orquestador
+	Microservicio Orquestador
+	
+	Paquete Java: com.microservicios.orquestador
+	
+	Clase Principal: OrchestratorApplication.java
+	
+	Configuración: application.properties
+	
+	Pruebas Unitarias: OrchestratorApplicationTests.java
+	
+	Microservicio Dominio
+	
+	Paquete Java: com.microservicios.dominio
+	
+	Clase Principal: DomainApplication.java
+	
+	Configuración: application.properties
 
-Paquete Java: com.microservicios.orquestador
+	Pruebas Unitarias: DomainApplicationTests.java
 
-Clase Principal: OrchestratorApplication.java
+Configuración y Ejecución:
 
-Configuración: application.properties
+	Clona este repositorio en tu máquina local.
+	Abre el proyecto en tu IDE preferido.
+	Configura tu base de datos PostgreSQL y ejecuta el script proporcionado.
+	Para cada microservicio (orquestador y dominio), ejecuta la clase principal (OrchestratorApplication.java y DomainApplication.java respectivamente).
+	
+	Los microservicios estarán disponibles en los puertos configurados en los archivos application.properties.
 
-Pruebas Unitarias: OrchestratorApplicationTests.java
+Pruebas:
 
-Microservicio Dominio
+	Para probar los microservicios, puedes usar herramientas como Postman. Aquí hay algunas solicitudes que puedes realizar:
 
-Paquete Java: com.microservicios.dominio
-
-Clase Principal: DomainApplication.java
-
-Configuración: application.properties
-
-Pruebas Unitarias: DomainApplicationTests.java
-
-Configuración y Ejecución
-Clona este repositorio en tu máquina local.
-Abre el proyecto en tu IDE preferido.
-Configura tu base de datos PostgreSQL y ejecuta el script proporcionado.
-Para cada microservicio (orquestador y dominio), ejecuta la clase principal (OrchestratorApplication.java y DomainApplication.java respectivamente).
-
-Los microservicios estarán disponibles en los puertos configurados en los archivos application.properties.
-
-Pruebas
-Para probar los microservicios, puedes usar herramientas como Postman. Aquí hay algunas solicitudes que puedes realizar:
-
-Guardar datos: Realiza una solicitud POST al endpoint /save del microservicio orquestador con los datos que deseas guardar.
+	Guardar datos: Realiza una solicitud POST al endpoint /save del microservicio orquestador con los datos que deseas guardar.
 
 Notas Adicionales:
 
-Se recomienda revisar y ajustar la configuración de la base de datos en los archivos application.properties según sea necesario.
-Asegúrate de tener las dependencias adecuadas especificadas en los archivos pom.xml de cada microservicio.
+	Se recomienda revisar y ajustar la configuración de la base de datos en los archivos application.properties según sea necesario.
+	Asegúrate de tener las dependencias adecuadas especificadas en los archivos pom.xml de cada microservicio.
