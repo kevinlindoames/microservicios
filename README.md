@@ -4,65 +4,66 @@ Proyecto Spring Boot con Microservicios:
 Configuración de la Base de Datos PostgreSQL:
 
 El script SQL a continuación crea la base de datos PostgreSQL y la tabla necesaria para este proyecto:
--- DROP SCHEMA public;
 
-CREATE SCHEMA public AUTHORIZATION postgres;
-
--- DROP TYPE public.datos;
-
-CREATE TYPE public.datos AS (
-	id bigserial,
-	nombre varchar(255));
-
--- DROP TYPE public."_datos";
-
-CREATE TYPE public."_datos" (
-	INPUT = array_in,
-	OUTPUT = array_out,
-	RECEIVE = array_recv,
-	SEND = array_send,
-	ANALYZE = array_typanalyze,
-	ALIGNMENT = 8,
-	STORAGE = any,
-	CATEGORY = A,
-	ELEMENT = public.datos,
-	DELIMITER = ',');
-
--- DROP SEQUENCE public.datos_id_seq;
-
-CREATE SEQUENCE public.datos_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 9223372036854775807
-	START 1
-	CACHE 1
-	NO CYCLE;
-
--- Permissions
-
-ALTER SEQUENCE public.datos_id_seq OWNER TO postgres;
-GRANT ALL ON SEQUENCE public.datos_id_seq TO postgres;
--- public.datos definition
-
--- Drop table
-
--- DROP TABLE public.datos;
-
-CREATE TABLE public.datos (
-	id bigserial NOT NULL,
-	nombre varchar(255) NULL,
-	CONSTRAINT datos_pkey PRIMARY KEY (id)
-);
-
--- Permissions
-
-ALTER TABLE public.datos OWNER TO postgres;
-GRANT ALL ON TABLE public.datos TO postgres;
-
--- Permissions
-
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO public;
+	-- DROP SCHEMA public;
+	
+	CREATE SCHEMA public AUTHORIZATION postgres;
+	
+	-- DROP TYPE public.datos;
+	
+	CREATE TYPE public.datos AS (
+		id bigserial,
+		nombre varchar(255));
+	
+	-- DROP TYPE public."_datos";
+	
+	CREATE TYPE public."_datos" (
+		INPUT = array_in,
+		OUTPUT = array_out,
+		RECEIVE = array_recv,
+		SEND = array_send,
+		ANALYZE = array_typanalyze,
+		ALIGNMENT = 8,
+		STORAGE = any,
+		CATEGORY = A,
+		ELEMENT = public.datos,
+		DELIMITER = ',');
+	
+	-- DROP SEQUENCE public.datos_id_seq;
+	
+	CREATE SEQUENCE public.datos_id_seq
+		INCREMENT BY 1
+		MINVALUE 1
+		MAXVALUE 9223372036854775807
+		START 1
+		CACHE 1
+		NO CYCLE;
+	
+	-- Permissions
+	
+	ALTER SEQUENCE public.datos_id_seq OWNER TO postgres;
+	GRANT ALL ON SEQUENCE public.datos_id_seq TO postgres;
+	-- public.datos definition
+	
+	-- Drop table
+	
+	-- DROP TABLE public.datos;
+	
+	CREATE TABLE public.datos (
+		id bigserial NOT NULL,
+		nombre varchar(255) NULL,
+		CONSTRAINT datos_pkey PRIMARY KEY (id)
+	);
+	
+	-- Permissions
+	
+	ALTER TABLE public.datos OWNER TO postgres;
+	GRANT ALL ON TABLE public.datos TO postgres;
+	
+	-- Permissions
+	
+	GRANT ALL ON SCHEMA public TO postgres;
+	GRANT ALL ON SCHEMA public TO public;
 
 Este script crea una tabla llamada datos en el esquema public de la base de datos. Asegúrate de ejecutar este script en tu entorno de base de datos PostgreSQL antes de ejecutar los microservicios.
 
