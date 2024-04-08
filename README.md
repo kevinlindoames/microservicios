@@ -65,27 +65,41 @@ GRANT ALL ON SCHEMA public TO public;
 Este script crea una tabla llamada datos en el esquema public de la base de datos. Asegúrate de ejecutar este script en tu entorno de base de datos PostgreSQL antes de ejecutar los microservicios.
 
 Detalles del Proyecto
+
 Microservicio Orquestador
+
 Paquete Java: com.microservicios.orquestador
+
 Clase Principal: OrchestratorApplication.java
+
 Configuración: application.properties
+
 Pruebas Unitarias: OrchestratorApplicationTests.java
+
 Microservicio Dominio
+
 Paquete Java: com.microservicios.dominio
+
 Clase Principal: DomainApplication.java
+
 Configuración: application.properties
+
 Pruebas Unitarias: DomainApplicationTests.java
+
 Configuración y Ejecución
 Clona este repositorio en tu máquina local.
 Abre el proyecto en tu IDE preferido.
 Configura tu base de datos PostgreSQL y ejecuta el script proporcionado.
 Para cada microservicio (orquestador y dominio), ejecuta la clase principal (OrchestratorApplication.java y DomainApplication.java respectivamente).
+
 Los microservicios estarán disponibles en los puertos configurados en los archivos application.properties.
+
 Pruebas
 Para probar los microservicios, puedes usar herramientas como Postman. Aquí hay algunas solicitudes que puedes realizar:
 
-Guardar datos: Realiza una solicitud POST al endpoint /process del microservicio orquestador con los datos que deseas guardar.
-Consultar datos: Realiza una solicitud GET al endpoint correspondiente del microservicio dominio para recuperar los datos guardados.
-Notas Adicionales
+Guardar datos: Realiza una solicitud POST al endpoint /save del microservicio orquestador con los datos que deseas guardar.
+
+Notas Adicionales:
+
 Se recomienda revisar y ajustar la configuración de la base de datos en los archivos application.properties según sea necesario.
 Asegúrate de tener las dependencias adecuadas especificadas en los archivos pom.xml de cada microservicio.
