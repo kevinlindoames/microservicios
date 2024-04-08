@@ -13,26 +13,28 @@ import org.springframework.web.client.RestTemplate;
 public class OrchestratorApplicationTests {
     @Test
     public void testProcessRequest_Success() {
-        // Mock RestTemplate
+        System.out.println("Iniciando prueba...");
+
+        // Mock de RestTemplate
         RestTemplate restTemplate = mock(RestTemplate.class);
 
-        // Set up mock behavior for restTemplate.postForEntity()
+        // Configurar el comportamiento del mock para restTemplate.postForEntity()
         when(restTemplate.postForEntity(anyString(), any(), any())).thenReturn(
-                new ResponseEntity<>("Data saved successfully", HttpStatus.OK));
+                new ResponseEntity<>("Datos guardados exitosamente", HttpStatus.OK));
 
-        // Create RequestData instance
+        // Crear instancia de RequestData
         RequestData requestData = new RequestData();
 
-        // Create OrchestratorController instance with mocked RestTemplate
-        OrchestratorController orchestratorController = new OrchestratorController();
-        orchestratorController.setRestTemplate(restTemplate);
+        // Crear instancia de OrchestratorController con RestTemplate mockeado
+        OrchestratorController orchestratorController = new OrchestratorController(restTemplate);
 
-        // Call the method to test
+        // Llamar al método a probar
         ResponseEntity<String> response = orchestratorController.processRequest(requestData);
 
-        // Verify the result
+        // Verificar el resultado
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Data saved successfully", response.getBody());
-    }
+        assertEquals("Datos guardados exitosamente", response.getBody());
 
+        System.out.println("Prueba completada.");
+    }
 }

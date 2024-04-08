@@ -4,39 +4,47 @@ import com.microservicios.dominio.controller.DomainController;
 import com.microservicios.dominio.model.DomainEntity;
 import com.microservicios.dominio.repository.EntityRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-
+@SpringBootTest
 public class DomainApplicationTests {
+
+    @Autowired
+    private DomainController domainController;
+
+    @MockBean
+    private EntityRepository entityRepository;
 
     @Test
     public void testSaveData_Success() {
-        // Mock EntityRepository
-        EntityRepository entityRepository = mock(EntityRepository.class);
+        System.out.println("Iniciando prueba...");
 
-        // Create test data
-        DomainEntity testData = new DomainEntity();
-        testData.setId(1L);
-        testData.setNombre("TestName");
+        // Crea los datos de prueba
+        DomainEntity data = new DomainEntity();
+        data.setId(5L);
+        data.setNombre("TestName");
+        System.out.println("Datos de prueba creados: " + data);
 
-        // Set up mock behavior for entityRepository.save()
-        when(entityRepository.save(any(DomainEntity.class))).thenReturn(testData);
+        // Configura el comportamiento del mock entityRepository
+        when(entityRepository.save(any(DomainEntity.class))).thenReturn(data);
+        System.out.println("Configuración del mock entityRepository completada.");
 
-        // Create DomainController instance with mocked repository
-        DomainController domainController = new DomainController();
-        domainController.setEntityRepository(entityRepository);
+        // Llama al método saveData de DomainController con los datos de prueba
+        ResponseEntity<String> response = domainController.saveData(data);
+        System.out.println("Método saveData llamado en DomainController.");
 
-        // Call the method to test
-        ResponseEntity<String> response = domainController.saveData(testData);
-
-        // Verify the result
+        // Verificar el resultado
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Datos guardados correctamente.", response.getBody());
-    }
 
+        System.out.println("Prueba completada con éxito.");
+    }
 }

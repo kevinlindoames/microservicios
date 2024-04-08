@@ -11,10 +11,13 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class OrchestratorController {
+    private final RestTemplate restTemplate;
+
+    // Constructor que acepta RestTemplate como parámetro
     @Autowired
-    private RestTemplate restTemplate;
-
-
+    public OrchestratorController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @PostMapping("/process")
     public ResponseEntity<String> processRequest(@RequestBody RequestData requestData) {
@@ -22,14 +25,14 @@ public class OrchestratorController {
             // Realizar la solicitud al microservicio del Dominio
             ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8081/save", requestData, String.class);
 
-            // Verificar si la respuesta es exitosa (código 2xx)
+            // Verificar si la respuesta es exitosa (código 200)
             if (response.getStatusCode().is2xxSuccessful()) {
                 return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
             } else if (response.getStatusCode().is4xxClientError()) {
-                // Manejar error del cliente (código 4xx)
+                // Manejar error del cliente (código 400)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en la solicitud al servicio del dominio.");
             } else if (response.getStatusCode().is5xxServerError()) {
-                // Manejar error del servidor (código 5xx)
+                // Manejar error del servidor (código 500)
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor del dominio.");
             } else {
                 // Manejar otros códigos de respuesta
